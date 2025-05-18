@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GREENBELLS SCHOOL</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+</head>
+<body>
+      <!-- Top Navigation Bar -->
+      <header class="header">
+        <nav class="container">
+            <a href="index.html"><img src="images/logo gb 1.png" alt=""></a>
+            <div class="nav" id="toggle">
+                <i class="fa fa-times" aria-hidden="true" onclick="hidemenu()"></i> 
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="result.html">Result Portal</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                                        <li><a href="news.html">News</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" aria-hidden="true" onclick="showmenu()"></i>
+        </nav>
+    </header>
+
+
+
+
+<section class="gallery-page">
+  <h1>Gallery</h1>
+
+  <div class="gallery-section" id="events">
+    <h2>Events</h2>
+    <div class="image-grid">
+      <img src="images/background.jpg" alt="Event 1">
+      <img src="images/about.jpg" alt="Event 2">
+      <img src="images/background.jpg" alt="Event 3">
+    </div>
+  </div>
+
+  <div class="gallery-section" id="academics">
+    <h2>Academics</h2>
+    <div class="image-grid">
+      <img src="images/background.jpg" alt="Event 1">
+      <img src="images/about.jpg" alt="Event 2">
+      <img src="images/background.jpg" alt="Event 3">
+    </div>
+  </div>
+
+  <div class="gallery-section" id="sports">
+    <h2>Sports</h2>
+    <div class="image-grid">
+      <img src="images/background.jpg" alt="Event 1">
+      <img src="images/about.jpg" alt="Event 2">
+      <img src="images/background.jpg" alt="Event 3">
+    </div>
+  </div>
+
+  <div class="gallery-section" id="excursions">
+    <h2>Excursions</h2>
+    <div class="image-grid">
+      <img src="images/background.jpg" alt="Event 1">
+      <img src="images/about.jpg" alt="Event 2">
+      <img src="images/background.jpg" alt="Event 3">
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox" style="display:none;">
+  <span class="close" onclick="closeLightbox()" title="Close">&times;</span>
+  <a class="download" id="downloadBtn" download title="Download Image">
+    <i class="fa fa-download"></i>
+  </a>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="Expanded view" />
+  <a class="prev" onclick="navigate(-1)" title="Previous">&#10094;</a>
+  <a class="next" onclick="navigate(1)" title="Next">&#10095;</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="footer-top">
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p><a href="mailto:school@example.com">greenbellsschool@gmail.com</a></p>
+            <p>Phone: (+234) 806-4601-961</p>
+        </div>
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                                <li><a href="academics.html">Academics</a></li>
+                <li><a href="admissions.html">Admissions</a></li>
+                                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Our School. All Rights Reserved.</p>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+        <script>
+        var toggle = document.getElementById("toggle");
+        function showmenu(){
+            toggle.style.right = "0";
+        }
+        function hidemenu(){
+            toggle.style.right = "-200px";
+        }
+    </script>
+
+
+<script>
+  // ======= JS START =======
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const downloadBtn = document.getElementById('downloadBtn');
+  let currentImgIndex = 0;
+  let currentImages = [];
+
+  document.querySelectorAll('.image-grid img').forEach((img, index) => {
+    img.addEventListener('click', () => {
+      const group = img.closest('.image-grid').querySelectorAll('img');
+      currentImages = Array.from(group);
+      currentImgIndex = Array.from(group).indexOf(img);
+      showImage(currentImgIndex);
+    });
+  });
+
+  function showImage(index) {
+    const img = currentImages[index];
+    if (!img) return;
+
+    // Add fade out, then fade in for smooth animation
+    lightboxImg.classList.add('fade');
+    setTimeout(() => {
+      lightboxImg.src = img.src;
+      downloadBtn.href = img.src;
+      lightboxImg.classList.remove('fade');
+    }, 200);
+
+    lightbox.style.display = 'flex'; // Show lightbox
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    lightboxImg.src = ''; // Clear src for reset
+  }
+
+  function navigate(direction) {
+    currentImgIndex += direction;
+    if (currentImgIndex < 0) currentImgIndex = currentImages.length - 1;
+    if (currentImgIndex >= currentImages.length) currentImgIndex = 0;
+    showImage(currentImgIndex);
+  }
+  // ======= JS END =======
+</script>
+
+    
+</body>
+</html>
